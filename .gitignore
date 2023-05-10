@@ -38,4 +38,5 @@ Thumbs.db
 
 # My files #
 ######################
-.go
+kbot
+.gitignore
