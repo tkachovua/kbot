@@ -19,7 +19,7 @@ get:
 
 build:  format get 
 	@echo "Building for $(TARGETS_ARCH)..."
-	CGO_ENABLED=0 GOOS=$(word 1,$(subst /, ,$(TARGETS_ARCH))) GOARCH=$(word 2,$(subst /, ,$(TARGETS_ARCH))) go build -v -o kbot-$(word 1,$(subst /, ,$(TARGETS_ARCH)))-$(word 2,$(subst /, ,$(TARGETS_ARCH))) -ldflags "-X="github.com/tkachovua/kbot/cmd.appVersion=${VERSION}
+	CGO_ENABLED=0 GOOS=$(word 1,$(subst /, ,$(TARGETS_ARCH))) GOARCH=$(word 2,$(subst /, ,$(TARGETS_ARCH))) go build -v -o kbot -ldflags "-X="github.com/tkachovua/kbot/cmd.appVersion=${VERSION}
 	
 image:
 	docker build . -t ${REGISTRY}/${APP}:${VERSION}-${TARGETS_ARCH}
