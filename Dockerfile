@@ -1,8 +1,11 @@
-FROM golang:1.19 as builder
+FROM golang:1.20 as builder
 
 WORKDIR /go/src/app
 COPY . .
-RUN make build
+ARG TARGETOS
+ARG TARGETARCH
+ARG CGO_ENABLED
+RUN make build TARGETOS=$TARGETOS TARGETARCH=$TARGETARCH CGO_ENABLED=$CGO_ENABLED
 
 FROM scratch
 WORKDIR /
