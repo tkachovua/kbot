@@ -1,34 +1,40 @@
 APP=$(shell basename $(shell git remote get-url origin))
-REGISTRY=gcr.io/spartan-context-384713
+REGISTRY=tkachovua
 VERSION=$(shell git describe --tags --abbrev=0)-$(shell git rev-parse --short HEAD)
-TARGETS_ARCH?=linux/amd64 linux/arm64 darwin/amd64 darwin/arm64 windows/amd64 windows/arm64 windows linux darwin
+TARGETOS=linux
+TARGETARCH=arm64
+CGO_ENABLED=0
+
+linux:
+    ${MAKE} build TARGETOS=linux TARGETARCH=${TARGETARCH} 
+
+macos:
+    ${MAKE} build TARGETOS=darwin TARGETARCH=${TARGETARCH}
+
+windows:
+    ${MAKE} build TARGETOS=windows TARGETARCH=${TARGETARCH} CGO_ENABLED=1
 
 format:
-	gofmt -s -w ./
+    gofmt -s -w ./
 
 lint:
-	golint
+    golint
 
 test:
-	go test -v 
+    go test -v 
 
 get:
-	go get
+    go get
 
-.PHONY: $(TARGETS_ARCH)
+build:  format get 
+    CGO_ENABLED=${CGO_ENABLED} GOOS=${TARGETOS} GOARCH=${TARGETARCH} go build -v -o kbot -ldflags "-X="github.com/tkachovua/kbot/cmd.appVersion=${VERSION}
 
-#build:   
-
-$(TARGETS_ARCH): format get
-	@echo "Building for $@..."
-	CGO_ENABLED=0 GOOS=$(word 1,$(subst /, ,$@)) GOARCH=$(word 2,$(subst /, ,$@)) go build -v -o kbot -ldflags "-X="github.com/tkachovua/kbot/cmd.appVersion=${VERSION}
-	
 image:
-	docker build -t ${REGISTRY}/${APP}:${VERSION} .
+    docker build . -t ${REGISTRY}/${APP}:${VERSION}-${TARGETARCH} --build-arg CGO_ENABLED=${CGO_ENABLED} --build-arg TARGETARCH=${TARGETARCH} --build-arg TARGETOS=${TARGETOS}
 
 push:
-	docker push ${REGISTRY}/${APP}:${VERSION}
+    docker push ${REGISTRY}/${APP}:${VERSION}-${TARGETARCH}
 
 clean:
-	rm -rf kbot
-	docker rmi ${REGISTRY}/${APP}:${VERSION}
+    rm -rf kbot
+    docker rmi ${REGISTRY}/${APP}:${VERSION}-${TARGETARCH}
