@@ -2,7 +2,7 @@ APP=$(shell basename $(shell git remote get-url origin))
 VERSION=$(shell git describe --tags --abbrev=0)-$(shell git rev-parse --short HEAD)
 REGISTRY=gcr.io
 PROJECT_ID=spartan-context-384713
-IMAGE_TAG=${REGISTRY}/${PROJECT_ID}/${APP}:${VERSION}-${TARGETOS}-${TARGETARCH}
+IMAGE_TAG=latest
 TARGETOS=linux
 TARGETARCH=arm64
 CGO_ENABLED=0
