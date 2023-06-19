@@ -6,6 +6,7 @@ image:
   tag: "v1.0.2-2e1d36c"
   os: "linux"
   arch: "amd64"
+  app: kbot
 secret:
   name: "kbot"
   env: "TELE_TOKEN"
