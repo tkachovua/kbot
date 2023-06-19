@@ -1,10 +1,10 @@
 APP=$(shell basename $(shell git remote get-url origin))
 VERSION=$(shell git describe --tags --abbrev=0)-$(shell git rev-parse --short HEAD)
-REGISTRY=gcr.io
+REGISTRY=ghcr.io
 PROJECT_ID=spartan-context-384713
 IMAGE_TAG=latest
 TARGETOS=linux
-TARGETARCH=arm64
+TARGETARCH=amd64
 CGO_ENABLED=0
 
 linux:
@@ -36,11 +36,11 @@ image:
 	docker build -t ${IMAGE_TAG} .
 
 push:
-#docker push ${REGISTRY}/${APP}:${VERSION}-${TARGETARCH}
-	gcloud auth login
-	gcloud config set project ${PROJECT_ID}
-	gcloud auth configure-docker
-	docker push ${IMAGE_TAG}
+	docker push ${REGISTRY}/${APP}:${VERSION}-${TARGETARCH}
+#	gcloud auth login
+#	gcloud config set project ${PROJECT_ID}
+#	gcloud auth configure-docker
+#	docker push ${IMAGE_TAG}
 
 clean:
 	rm -rf kbot

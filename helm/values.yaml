@@ -1,8 +1,10 @@
 ---
 replicaCount: 1
 image:
-  repository: tkachovua
+  registry: "ghcr.io"
+  repository: "tkachovua/kbot"
   tag: "v1.0.2-0a4ff95"
+  os: linux
   arch: amd64
 secret:
   name: "kbot"
