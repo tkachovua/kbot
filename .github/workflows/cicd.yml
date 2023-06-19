@@ -15,8 +15,8 @@ jobs:
         with:
           fetch-depth: 0
 
-      # - name: Run test
-      #   run: make test
+      - name: Run test
+        run: make test
       - name: Docker Hub login
         uses: docker/login-action@v2
         with:
