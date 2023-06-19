@@ -3,7 +3,9 @@ name: KBOT-CICD
 on: 
   push:
     branches: [ develop ]
-
+env:
+  OS: linux
+  ARCH: amd64
 jobs:
   ci:
     name: CI
