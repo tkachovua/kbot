@@ -4,8 +4,8 @@ image:
   registry: "ghcr.io"
   repository: "tkachovua/kbot"
   tag: "v1.0.2-dd4354f"
-  os: ""
-  arch: ""
+  os: "linux"
+  arch: "amd64"
 secret:
   name: "kbot"
   env: "TELE_TOKEN"
