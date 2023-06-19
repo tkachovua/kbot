@@ -40,10 +40,9 @@ spec:
           - mountPath: /dev/mem
             name: dev-mem
           image: {{ .Values.image.registry }}/{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}-{{ .Values.image.os | default "linux"}}-{{ .Values.image.arch | default "amd64"}}
-
-#          env:
-#          - name: {{ .Values.secret.env }}
-#            valueFrom:
-#              secretKeyRef:
-#                key: {{ .Values.secret.key }}
-#                name: {{ .Values.secret.name }}
+          env:
+          - name: {{ .Values.secret.env }}
+            valueFrom:
+              secretKeyRef:
+                key: {{ .Values.secret.key }}
+                name: {{ .Values.secret.name }}
