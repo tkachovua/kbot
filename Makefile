@@ -1,6 +1,6 @@
 APP=$(shell basename $(shell git remote get-url origin))
 VERSION=$(shell git describe --tags --abbrev=0)-$(shell git rev-parse --short HEAD)
-REGISTRY=tkachovua
+REGISTRY=ghcr.io/tkachovua
 PROJECT_ID=spartan-context-384713
 IMAGE_TAG=latest
 TARGETOS=linux
