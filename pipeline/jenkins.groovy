@@ -1,6 +1,9 @@
 pipeline {
     agent any
-
+        environment {
+            REPO = 'https://github.com/tkachovua/kbot'
+            BRANCH = 'main'
+        }
     parameters {
         choice(
             name: 'OS',
