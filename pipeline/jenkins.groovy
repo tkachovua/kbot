@@ -50,14 +50,14 @@ pipeline {
                 }
             }
         }
-        stage("push") {
-            steps {
-                script {
-                    docker.withRegistry('', 'dockerhub') {
-                        sh 'make push'
-                    }
-                }
-            }
-        }
+//        stage("push") {
+//            steps {
+//               script {
+//                   docker.withRegistry('', 'dockerhub') {
+//                        sh 'make push'
+//                    }
+//                }
+//            }
+//        }
     }
 }
