@@ -57,6 +57,11 @@ to quickly create a Cobra application.`,
 			case "menu":
 				err = m.Send(fmt.Sprintf("menu"))
 			}
+			
+			switch payload {
+			case "test":
+				err = m.Send(fmt.Sprintf("test"))
+			}
 
 			return err
 		})
